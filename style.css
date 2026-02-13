@@ -621,6 +621,11 @@ footer {
     transform: translateY(0);
   }
 
+  .brand-name {
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+  }
+
   .footer-inner {
     flex-direction: column;
     text-align: center;
