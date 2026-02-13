@@ -147,7 +147,7 @@ a {
   color: var(--lunar);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   text-shadow:
     0 0 20px rgba(11, 15, 20, 0.9),
     0 0 40px rgba(11, 15, 20, 0.7);
