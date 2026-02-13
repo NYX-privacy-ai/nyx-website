@@ -155,13 +155,35 @@ a {
   animation: fadeInUp 1.2s ease-out 1.3s forwards;
 }
 
+.powered-by {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+  color: var(--lunar-muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeInUp 1.2s ease-out 1.5s forwards;
+}
+
+.powered-by a {
+  color: var(--lunar);
+  border-bottom: 1px solid rgba(228, 234, 242, 0.2);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.powered-by a:hover {
+  color: var(--horizon);
+  border-color: var(--horizon);
+}
+
 .hero-cta {
   display: flex;
   gap: 1.25rem;
   justify-content: center;
   flex-wrap: wrap;
   opacity: 0;
-  animation: fadeInUp 1.2s ease-out 1.6s forwards;
+  animation: fadeInUp 1.2s ease-out 1.8s forwards;
 }
 
 /* ── Buttons ──────────────────────────────────────── */
