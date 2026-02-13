@@ -161,7 +161,7 @@ a {
   font-size: clamp(0.75rem, 1.2vw, 0.9rem);
   color: var(--lunar-muted);
   letter-spacing: 0.08em;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3.5rem;
   opacity: 0;
   animation: fadeInUp 1.2s ease-out 1.5s forwards;
 }
