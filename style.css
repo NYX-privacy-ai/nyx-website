@@ -363,12 +363,19 @@ a {
 
 .capabilities-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 1px;
   margin-top: 4rem;
   background: rgba(216, 222, 233, 0.06);
   border: 1px solid rgba(216, 222, 233, 0.06);
 }
+
+/* Row 1: 4 equal items spanning 3 cols each */
+.capability-card:nth-child(-n+4) { grid-column: span 3; }
+/* Row 2: 3 items centred — span 4 cols each, filling the row evenly */
+.capability-card:nth-child(5) { grid-column: 1 / 5; }
+.capability-card:nth-child(6) { grid-column: 5 / 9; }
+.capability-card:nth-child(7) { grid-column: 9 / 13; }
 
 .capability-card {
   padding: 2.5rem 2rem;
@@ -418,12 +425,19 @@ a {
 
 .arch-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(12, 1fr);
   gap: 1px;
   margin-top: 4rem;
   background: rgba(216, 222, 233, 0.06);
   border: 1px solid rgba(216, 222, 233, 0.06);
 }
+
+/* Row 1: 4 items spanning 3 cols each */
+.arch-item:nth-child(-n+4) { grid-column: span 3; }
+/* Row 2: 3 items spanning 4 cols each, filling evenly */
+.arch-item:nth-child(5) { grid-column: 1 / 5; }
+.arch-item:nth-child(6) { grid-column: 5 / 9; }
+.arch-item:nth-child(7) { grid-column: 9 / 13; }
 
 .arch-item {
   padding: 2rem 1.5rem;
@@ -631,6 +645,11 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .capability-card:nth-child(n),
+  .arch-item:nth-child(n) {
+    grid-column: 1 / -1;
+  }
+
   .section {
     padding: 5rem 1.5rem;
   }
@@ -673,12 +692,24 @@ footer {
 }
 
 @media (max-width: 1024px) and (min-width: 769px) {
-  .capabilities-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .capabilities-grid,
+  .arch-grid {
+    grid-template-columns: repeat(6, 1fr);
   }
 
-  .arch-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* Reset desktop nth-child rules */
+  .capability-card:nth-child(n),
+  .arch-item:nth-child(n) {
+    grid-column: span 3;
+  }
+
+  /* Last item (7th) centred on its own row */
+  .capability-card:nth-child(7) {
+    grid-column: 2 / 6;
+  }
+
+  .arch-item:nth-child(7) {
+    grid-column: 2 / 6;
   }
 }
 
