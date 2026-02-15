@@ -86,6 +86,8 @@
   // ── Smooth anchor scrolling ─────────────────────────
 
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    // Skip download buttons — they have their own onclick handler
+    if (anchor.classList.contains('download-dmg')) return;
     anchor.addEventListener('click', function (e) {
       var target = document.querySelector(this.getAttribute('href'));
       if (target) {
@@ -96,3 +98,66 @@
   });
 
 })();
+
+// ── Direct .dmg download (outside IIFE so onclick can call it) ──
+
+function downloadNyx(e) {
+  e.preventDefault();
+  var btn = e.currentTarget;
+  var originalText = btn.textContent.trim();
+  btn.textContent = 'Fetching latest…';
+  btn.style.pointerEvents = 'none';
+
+  // Detect architecture: Apple Silicon (arm64) vs Intel (x86_64)
+  var isArm = false;
+  try {
+    // navigator.userAgentData.architecture is available in some browsers
+    if (navigator.userAgentData && navigator.userAgentData.architecture) {
+      isArm = navigator.userAgentData.architecture === 'arm';
+    } else if (navigator.platform === 'MacIntel') {
+      // On Apple Silicon running Rosetta, platform still says MacIntel
+      // but we can detect via GL renderer or WebGL
+      var canvas = document.createElement('canvas');
+      var gl = canvas.getContext('webgl');
+      if (gl) {
+        var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        if (debugInfo) {
+          var renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+          isArm = /apple\s*(m\d|gpu)/i.test(renderer);
+        }
+      }
+    }
+  } catch (err) {
+    // Default to aarch64 — most modern Macs are Apple Silicon
+    isArm = true;
+  }
+
+  var arch = isArm ? 'aarch64' : 'x64';
+
+  fetch('https://api.github.com/repos/NYX-privacy-ai/nyx/releases/latest')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      var dmg = null;
+      var assets = data.assets || [];
+      for (var i = 0; i < assets.length; i++) {
+        if (assets[i].name.indexOf(arch) !== -1 && assets[i].name.endsWith('.dmg')) {
+          dmg = assets[i].browser_download_url;
+          break;
+        }
+      }
+      if (dmg) {
+        window.location.href = dmg;
+      } else {
+        // Fallback: open releases page
+        window.open('https://github.com/NYX-privacy-ai/nyx/releases/latest', '_blank');
+      }
+    })
+    .catch(function () {
+      // API failed — fallback to releases page
+      window.open('https://github.com/NYX-privacy-ai/nyx/releases/latest', '_blank');
+    })
+    .finally(function () {
+      btn.textContent = originalText;
+      btn.style.pointerEvents = '';
+    });
+}
