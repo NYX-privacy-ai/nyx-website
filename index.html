@@ -46,7 +46,7 @@
       <div class="horizon-line"></div>
       <p class="tagline">Own the Night</p>
       <p class="subtitle">Your private AI chief of staff</p>
-      <p class="powered-by">Powered by <a href="https://openclaw.com" target="_blank" rel="noopener">OpenClaw</a> &middot; <a href="https://near.ai" target="_blank" rel="noopener">NEAR.ai</a> &middot; <a href="https://near.org/intents" target="_blank" rel="noopener">NEAR Intents</a> &middot; <a href="https://clawdtalk.com" target="_blank" rel="noopener">ClawdTalk</a></p>
+      <p class="powered-by">Powered by <a href="https://openclaw.com" target="_blank" rel="noopener">OpenClaw</a> &middot; <a href="https://near.ai" target="_blank" rel="noopener">NEAR.ai</a> &middot; <a href="https://near.org/intents" target="_blank" rel="noopener">NEAR Intents</a> &middot; <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code</a> &middot; <a href="https://clawdtalk.com" target="_blank" rel="noopener">ClawdTalk</a></p>
       <div class="hero-cta">
         <a href="#" class="btn btn-primary download-dmg" onclick="downloadNyx(event)">
           Download for macOS
@@ -153,6 +153,14 @@
           <h3>Local AI</h3>
           <p>Private on-device inference via Ollama. No data leaves your machine. No cloud required.</p>
         </div>
+
+        <div class="capability-card">
+          <div class="capability-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h12a2.25 2.25 0 002.25-2.25V5.25A2.25 2.25 0 0018 3H6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 006 21z"/></svg>
+          </div>
+          <h3>Claude Code</h3>
+          <p>Embedded terminal with full Claude Code CLI. Bidirectional MCP integration &mdash; Claude Code can call Nyx tools, Nyx can host Claude Code.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -189,6 +197,10 @@
         <div class="arch-item">
           <div class="arch-label">Voice</div>
           <div class="arch-value">ClawdTalk via Telnyx telephony</div>
+        </div>
+        <div class="arch-item">
+          <div class="arch-label">Developer</div>
+          <div class="arch-value">Claude Code MCP + embedded PTY terminal</div>
         </div>
         <div class="arch-item">
           <div class="arch-label">Platform</div>
