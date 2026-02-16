@@ -45,10 +45,10 @@
       lastTime = heroVideo.currentTime;
     }, 1500);
 
-    // Handle network/decode errors — try CDN fallback
+    // Handle network/decode errors — try lower resolution fallback
     heroVideo.addEventListener('error', function () {
-      if (heroVideo.src.indexOf('pexels') === -1) {
-        // Local source failed — switch to CDN (540p for fast remote loading)
+      if (heroVideo.src.indexOf('540') === -1) {
+        // 720p failed — try 540p as fallback
         heroVideo.src = 'https://videos.pexels.com/video-files/3830517/3830517-sd_960_540_30fps.mp4';
         heroVideo.load();
         heroVideo.play();

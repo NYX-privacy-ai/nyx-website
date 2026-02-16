@@ -1,4 +1,3 @@
-# Keep the 720p hero video in repo (25MB, within GitHub Pages limits)
-# Exclude the original 1080p (49MB) to keep repo lean
-assets/video/hero-ocean.mp4
+# Video files exceed Cloudflare Pages 25MB limit — served from Pexels CDN
+assets/video/
 .DS_Store
