@@ -1,2 +1,4 @@
-assets/video/
+# Keep the 720p hero video in repo (25MB, within GitHub Pages limits)
+# Exclude the original 1080p (49MB) to keep repo lean
+assets/video/hero-ocean.mp4
 .DS_Store
