@@ -164,24 +164,44 @@
 
 })();
 
-// ── Direct .dmg download (outside IIFE so onclick can call it) ──
+// ── Install guide modal + download (outside IIFE so onclick can call them) ──
 
 function downloadNyx(e) {
   e.preventDefault();
-  var btn = e.currentTarget;
-  var originalText = btn.textContent.trim();
-  btn.textContent = 'Fetching latest…';
-  btn.style.pointerEvents = 'none';
+  // Show the install guide modal instead of downloading directly
+  var modal = document.getElementById('install-modal');
+  if (modal) {
+    modal.style.display = 'flex';
+    // Trigger animation on next frame
+    requestAnimationFrame(function () {
+      modal.classList.add('active');
+    });
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeInstallModal() {
+  var modal = document.getElementById('install-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    setTimeout(function () {
+      modal.style.display = 'none';
+    }, 300);
+    document.body.style.overflow = '';
+  }
+}
+
+function proceedDownload() {
+  // Close the modal
+  closeInstallModal();
 
   // Detect architecture: Apple Silicon (arm64) vs Intel (x86_64)
   var isArm = false;
   try {
-    // navigator.userAgentData.architecture is available in some browsers
     if (navigator.userAgentData && navigator.userAgentData.architecture) {
       isArm = navigator.userAgentData.architecture === 'arm';
     } else if (navigator.platform === 'MacIntel') {
-      // On Apple Silicon running Rosetta, platform still says MacIntel
-      // but we can detect via GL renderer or WebGL
       var canvas = document.createElement('canvas');
       var gl = canvas.getContext('webgl');
       if (gl) {
@@ -193,7 +213,6 @@ function downloadNyx(e) {
       }
     }
   } catch (err) {
-    // Default to aarch64 — most modern Macs are Apple Silicon
     isArm = true;
   }
 
@@ -213,16 +232,24 @@ function downloadNyx(e) {
       if (dmg) {
         window.location.href = dmg;
       } else {
-        // Fallback: open releases page
         window.open('https://github.com/NYX-privacy-ai/nyx/releases/latest', '_blank');
       }
     })
     .catch(function () {
-      // API failed — fallback to releases page
       window.open('https://github.com/NYX-privacy-ai/nyx/releases/latest', '_blank');
-    })
-    .finally(function () {
-      btn.textContent = originalText;
-      btn.style.pointerEvents = '';
     });
 }
+
+// Close modal on overlay click (not the card itself)
+document.addEventListener('click', function (e) {
+  if (e.target && e.target.id === 'install-modal') {
+    closeInstallModal();
+  }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    closeInstallModal();
+  }
+});

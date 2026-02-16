@@ -798,6 +798,341 @@ footer {
   }
 }
 
+/* ══════════════════════════════════════════════════════
+   INSTALL GUIDE MODAL
+   ══════════════════════════════════════════════════════ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+}
+
+.modal-card {
+  background: #1A1F28;
+  border: 1px solid rgba(216, 222, 233, 0.08);
+  border-radius: 12px;
+  max-width: 620px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 2.5rem;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-card {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  color: var(--lunar-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: var(--horizon);
+}
+
+.modal-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.8rem;
+  color: var(--horizon);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.modal-subtitle {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: var(--lunar-muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+/* ── Steps ──────────────────────────────────────── */
+
+.install-step {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  background: rgba(216, 222, 233, 0.06);
+  border: 1px solid rgba(216, 222, 233, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: var(--lunar);
+  margin-top: 0.1rem;
+}
+
+.step-content h3 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--horizon);
+  margin-bottom: 0.5rem;
+}
+
+.step-content p {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: var(--lunar-muted);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.step-content code {
+  background: rgba(216, 222, 233, 0.08);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.82rem;
+  color: var(--lunar);
+}
+
+.step-note {
+  font-size: 0.82rem !important;
+  color: var(--lunar) !important;
+  margin-top: 0.5rem;
+}
+
+/* ── macOS Gatekeeper Dialog Mockup ──────────────── */
+
+.macos-dialog {
+  background: #2C2C2E;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  margin: 0.75rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.macos-dialog-icon {
+  margin-bottom: 1rem;
+}
+
+.macos-dialog-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.macos-dialog-text strong {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #F5F5F7;
+  line-height: 1.4;
+}
+
+.macos-dialog-text span {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: #98989D;
+}
+
+.macos-dialog-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.macos-btn-primary,
+.macos-btn-secondary {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: 0.78rem;
+  padding: 0.4rem 1.25rem;
+  border-radius: 6px;
+  cursor: default;
+}
+
+.macos-btn-primary {
+  background: #0A84FF;
+  color: #FFFFFF;
+}
+
+.macos-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #0A84FF;
+}
+
+/* ── macOS Settings Panel Mockup ─────────────────── */
+
+.macos-settings-panel {
+  background: #2C2C2E;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0.75rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.macos-settings-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #F5F5F7;
+}
+
+.macos-settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.macos-settings-message {
+  flex: 1;
+  min-width: 0;
+}
+
+.macos-settings-blocked {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: #98989D;
+  line-height: 1.5;
+}
+
+.macos-btn-open-anyway {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  font-size: 0.78rem;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #F5F5F7;
+  white-space: nowrap;
+  cursor: default;
+}
+
+/* ── Certificate Notice ──────────────────────────── */
+
+.cert-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 200, 50, 0.06);
+  border: 1px solid rgba(255, 200, 50, 0.15);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.cert-notice svg {
+  color: rgba(255, 200, 50, 0.6);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.cert-notice span {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: rgba(255, 200, 50, 0.8);
+  line-height: 1.6;
+}
+
+/* ── Modal Download Button ───────────────────────── */
+
+.modal-download-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 0.9rem 2rem;
+  font-size: 0.95rem;
+}
+
+/* ── Modal scrollbar ─────────────────────────────── */
+
+.modal-card::-webkit-scrollbar {
+  width: 4px;
+}
+
+.modal-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-card::-webkit-scrollbar-thumb {
+  background: rgba(216, 222, 233, 0.1);
+  border-radius: 2px;
+}
+
+/* ── Modal responsive ────────────────────────────── */
+
+@media (max-width: 600px) {
+  .modal-card {
+    padding: 1.5rem;
+    max-height: 90vh;
+    border-radius: 10px;
+  }
+
+  .modal-title {
+    font-size: 1.4rem;
+  }
+
+  .install-step {
+    gap: 0.75rem;
+  }
+
+  .macos-dialog {
+    padding: 1rem;
+  }
+
+  .macos-dialog-buttons {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .macos-settings-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
 /* ── Selection styling ────────────────────────────── */
 
 ::selection {
