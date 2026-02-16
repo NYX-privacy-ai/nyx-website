@@ -68,27 +68,32 @@ a {
   object-fit: cover;
   object-position: center center;
   z-index: 0;
-  /* Night grading: deep blue moonlit ocean — intense blue, bright crests */
-  filter: brightness(0.65) saturate(0.7) contrast(1.8) sepia(0.4) hue-rotate(190deg);
+  /* Night grading: simplified to 2 filters for smooth GPU playback */
+  filter: brightness(0.45) saturate(0.5);
+  /* Force GPU compositing layer for smooth filter + video decode */
+  will-change: transform;
+  transform: translateZ(0);
 }
 
-/* Overlay: midnight tint + vignette + bottom fade into first section */
+/* Overlay: midnight blue tint + vignette + bottom fade into first section.
+   The blue tinting is done here (cheap static layer) instead of via CSS
+   filters on the video (expensive per-frame GPU operation). */
 .hero-overlay {
   position: absolute;
   inset: 0;
   z-index: 2;
   background:
-    /* Subtle midnight tint — let moonlit highlights punch through */
+    /* Deep midnight blue colour wash — creates the moonlit ocean look */
     linear-gradient(to bottom,
-      rgba(10, 18, 32, 0.30) 0%,
-      rgba(10, 18, 32, 0.10) 30%,
-      transparent 50%,
-      rgba(11, 15, 20, 0.20) 70%,
-      rgba(11, 15, 20, 0.70) 90%,
+      rgba(8, 16, 38, 0.50) 0%,
+      rgba(8, 16, 38, 0.35) 30%,
+      rgba(8, 16, 38, 0.25) 50%,
+      rgba(11, 15, 20, 0.40) 70%,
+      rgba(11, 15, 20, 0.80) 90%,
       var(--obsidian) 100%
     ),
     /* Vignette for edge framing */
-    radial-gradient(ellipse at center 45%, transparent 35%, rgba(11, 15, 20, 0.45) 100%);
+    radial-gradient(ellipse at center 45%, transparent 35%, rgba(11, 15, 20, 0.50) 100%);
   pointer-events: none;
 }
 
@@ -647,6 +652,16 @@ footer {
 
 /* ── Mobile: single column ────────────────────────── */
 @media (max-width: 600px) {
+  /* Disable video on mobile — save bandwidth + GPU, use static image */
+  .hero-video {
+    display: none;
+  }
+
+  #hero {
+    background: url('assets/images/hero-bg.png') center center / cover no-repeat;
+    background-color: var(--obsidian);
+  }
+
   .capabilities-grid,
   .arch-grid {
     grid-template-columns: 1fr;

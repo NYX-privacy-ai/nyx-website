@@ -6,6 +6,71 @@
 (function () {
   'use strict';
 
+  // ── Hero video playback recovery ──────────────────────
+  // Ensures the background video plays smoothly. Handles stalls,
+  // buffering failures, and autoplay restrictions.
+
+  var heroVideo = document.getElementById('hero-video');
+  if (heroVideo) {
+    // Attempt play (catches autoplay-blocked browsers)
+    var playPromise = heroVideo.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(function () {
+        // Autoplay blocked — try again after user interaction
+        document.addEventListener('click', function resumeVideo() {
+          heroVideo.play();
+          document.removeEventListener('click', resumeVideo);
+        }, { once: true });
+      });
+    }
+
+    // Detect stalls: if video freezes for 3s while it should be playing,
+    // nudge it forward to resume playback
+    var lastTime = -1;
+    var stallCount = 0;
+    var stallChecker = setInterval(function () {
+      if (heroVideo.paused || heroVideo.ended) return;
+
+      if (heroVideo.currentTime === lastTime && lastTime > 0) {
+        stallCount++;
+        if (stallCount >= 2) {
+          // Stalled for ~3s — nudge playback
+          heroVideo.currentTime += 0.1;
+          heroVideo.play();
+          stallCount = 0;
+        }
+      } else {
+        stallCount = 0;
+      }
+      lastTime = heroVideo.currentTime;
+    }, 1500);
+
+    // Handle network/decode errors — try CDN fallback
+    heroVideo.addEventListener('error', function () {
+      if (heroVideo.src.indexOf('pexels') === -1) {
+        // Local source failed — switch to CDN
+        heroVideo.src = 'https://videos.pexels.com/video-files/3830517/3830517-hd_1920_1080_30fps.mp4';
+        heroVideo.load();
+        heroVideo.play();
+      }
+    });
+
+    // Clean up when user scrolls past the hero (save GPU)
+    var videoObserver = null;
+    if ('IntersectionObserver' in window) {
+      videoObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            if (heroVideo.paused) heroVideo.play();
+          } else {
+            heroVideo.pause();
+          }
+        });
+      }, { threshold: 0.05 });
+      videoObserver.observe(heroVideo);
+    }
+  }
+
   // ── Scroll-triggered reveals ────────────────────────
 
   // Add .reveal class to all section elements that should animate in

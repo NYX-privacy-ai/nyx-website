@@ -37,6 +37,9 @@
   ════════════════════════════════════════════════════ -->
   <section id="hero">
     <video id="hero-video" class="hero-video" autoplay loop muted playsinline preload="auto">
+      <!-- Local asset (primary — instant playback, no CDN latency) -->
+      <source src="assets/video/hero-ocean.mp4" type="video/mp4">
+      <!-- CDN fallback for deployed builds where local asset may not exist -->
       <source src="https://videos.pexels.com/video-files/3830517/3830517-hd_1920_1080_30fps.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
