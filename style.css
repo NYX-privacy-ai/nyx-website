@@ -372,20 +372,32 @@ a {
 
 /* Row 1: 4 equal items spanning 3 cols each */
 .capability-card:nth-child(-n+4) { grid-column: span 3; }
-/* Row 2: 3 items centred — span 4 cols each, filling the row evenly */
-.capability-card:nth-child(5) { grid-column: 1 / 5; }
-.capability-card:nth-child(6) { grid-column: 5 / 9; }
-.capability-card:nth-child(7) { grid-column: 9 / 13; }
+/* Row 2: 4 items spanning 3 cols each */
+.capability-card:nth-child(n+5) { grid-column: span 3; }
 
 .capability-card {
   padding: 2.5rem 2rem;
   background: rgba(15, 27, 42, 0.85);
   text-align: left;
-  transition: background 0.4s ease;
+  transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 .capability-card:hover {
   background: rgba(22, 38, 58, 0.9);
+}
+
+/* Highlight variant for Privacy Shield card */
+.capability-card-highlight {
+  border-left: 2px solid rgba(200, 220, 255, 0.15);
+}
+
+.capability-card-highlight .capability-icon {
+  color: var(--lunar);
+  opacity: 0.85;
+}
+
+.capability-card-highlight:hover {
+  border-left-color: rgba(200, 220, 255, 0.35);
 }
 
 .capability-icon {
@@ -434,10 +446,8 @@ a {
 
 /* Row 1: 4 items spanning 3 cols each */
 .arch-item:nth-child(-n+4) { grid-column: span 3; }
-/* Row 2: 3 items spanning 4 cols each, filling evenly */
-.arch-item:nth-child(5) { grid-column: 1 / 5; }
-.arch-item:nth-child(6) { grid-column: 5 / 9; }
-.arch-item:nth-child(7) { grid-column: 9 / 13; }
+/* Row 2: 4 items spanning 3 cols each */
+.arch-item:nth-child(n+5) { grid-column: span 3; }
 
 .arch-item {
   padding: 2rem 1.5rem;
@@ -697,19 +707,10 @@ footer {
     grid-template-columns: repeat(6, 1fr);
   }
 
-  /* Reset desktop nth-child rules */
+  /* Reset desktop nth-child rules — 2 per row on tablet */
   .capability-card:nth-child(n),
   .arch-item:nth-child(n) {
     grid-column: span 3;
-  }
-
-  /* Last item (7th) centred on its own row */
-  .capability-card:nth-child(7) {
-    grid-column: 2 / 6;
-  }
-
-  .arch-item:nth-child(7) {
-    grid-column: 2 / 6;
   }
 }
 
