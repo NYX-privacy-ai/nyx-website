@@ -48,8 +48,8 @@
     // Handle network/decode errors — try CDN fallback
     heroVideo.addEventListener('error', function () {
       if (heroVideo.src.indexOf('pexels') === -1) {
-        // Local source failed — switch to CDN
-        heroVideo.src = 'https://videos.pexels.com/video-files/3830517/3830517-hd_1920_1080_30fps.mp4';
+        // Local source failed — switch to CDN (540p for fast remote loading)
+        heroVideo.src = 'https://videos.pexels.com/video-files/3830517/3830517-sd_960_540_30fps.mp4';
         heroVideo.load();
         heroVideo.play();
       }

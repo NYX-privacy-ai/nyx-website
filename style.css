@@ -57,6 +57,8 @@ a {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  /* Fallback bg while video loads — matches poster image */
+  background: var(--obsidian);
 }
 
 /* Video background — full bleed, covers viewport, graded to night */

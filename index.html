@@ -36,11 +36,12 @@
        HERO — Video background (stormy ocean)
   ════════════════════════════════════════════════════ -->
   <section id="hero">
-    <video id="hero-video" class="hero-video" autoplay loop muted playsinline preload="auto">
-      <!-- Local asset (primary — instant playback, no CDN latency) -->
-      <source src="assets/video/hero-ocean.mp4" type="video/mp4">
-      <!-- CDN fallback for deployed builds where local asset may not exist -->
-      <source src="https://videos.pexels.com/video-files/3830517/3830517-hd_1920_1080_30fps.mp4" type="video/mp4">
+    <video id="hero-video" class="hero-video" autoplay loop muted playsinline
+           preload="auto" poster="assets/images/hero-bg.png">
+      <!-- 720p local (25MB — half the size of 1080p, still crisp for filtered bg) -->
+      <source src="assets/video/hero-ocean-720p.mp4" type="video/mp4">
+      <!-- CDN fallback: 540p for deployed builds / slow connections -->
+      <source src="https://videos.pexels.com/video-files/3830517/3830517-sd_960_540_30fps.mp4" type="video/mp4">
     </video>
     <div class="hero-overlay"></div>
 
