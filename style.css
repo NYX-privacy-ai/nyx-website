@@ -266,6 +266,12 @@ a {
   text-align: center;
 }
 
+/* Wider container for grid-heavy sections (5-column layouts) */
+#capabilities .section-inner,
+#architecture .section-inner {
+  max-width: 1200px;
+}
+
 .section-dark {
   background:
     linear-gradient(to bottom,
@@ -363,17 +369,12 @@ a {
 
 .capabilities-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1px;
   margin-top: 4rem;
   background: rgba(216, 222, 233, 0.06);
   border: 1px solid rgba(216, 222, 233, 0.06);
 }
-
-/* Row 1: 4 equal items spanning 3 cols each */
-.capability-card:nth-child(-n+4) { grid-column: span 3; }
-/* Row 2: 4 items spanning 3 cols each */
-.capability-card:nth-child(n+5) { grid-column: span 3; }
 
 .capability-card {
   padding: 2.5rem 2rem;
@@ -437,17 +438,12 @@ a {
 
 .arch-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1px;
   margin-top: 4rem;
   background: rgba(216, 222, 233, 0.06);
   border: 1px solid rgba(216, 222, 233, 0.06);
 }
-
-/* Row 1: 4 items spanning 3 cols each */
-.arch-item:nth-child(-n+4) { grid-column: span 3; }
-/* Row 2: 4 items spanning 3 cols each */
-.arch-item:nth-child(n+5) { grid-column: span 3; }
 
 .arch-item {
   padding: 2rem 1.5rem;
@@ -564,7 +560,7 @@ footer {
 }
 
 .footer-inner {
-  max-width: 960px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -649,15 +645,104 @@ footer {
    RESPONSIVE
    ══════════════════════════════════════════════════════ */
 
-@media (max-width: 768px) {
+/* ── Mobile: single column ────────────────────────── */
+@media (max-width: 600px) {
   .capabilities-grid,
   .arch-grid {
     grid-template-columns: 1fr;
   }
 
-  .capability-card:nth-child(n),
-  .arch-item:nth-child(n) {
-    grid-column: 1 / -1;
+  .section {
+    padding: 4rem 1.25rem;
+  }
+
+  .section-cta {
+    padding: 5rem 1.25rem;
+  }
+
+  .hero-content {
+    transform: translateY(0);
+    padding: 0 1.25rem;
+  }
+
+  .brand-name {
+    letter-spacing: 0.12em;
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+  }
+
+  .tagline {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+  }
+
+  .subtitle {
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+  }
+
+  .powered-by {
+    font-size: 0.7rem;
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
+
+  .capability-card {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .arch-item {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.25rem;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  .providers-list {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .provider-sep {
+    display: none;
+  }
+
+  .section-heading {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .cta-heading {
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+  }
+}
+
+/* ── Small tablets: 2 columns ────────────────────── */
+@media (min-width: 601px) and (max-width: 900px) {
+  .capabilities-grid,
+  .arch-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #capabilities .section-inner,
+  #architecture .section-inner {
+    max-width: 680px;
   }
 
   .section {
@@ -669,12 +754,7 @@ footer {
   }
 
   .hero-content {
-    transform: translateY(0);
-  }
-
-  .brand-name {
-    letter-spacing: 0.18em;
-    white-space: nowrap;
+    transform: translateY(-4%);
   }
 
   .footer-inner {
@@ -686,31 +766,18 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
   }
-
-  .providers-list {
-    gap: 0.3rem;
-  }
-
-  .provider-sep {
-    display: none;
-  }
-
-  .providers-list {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
 }
 
-@media (max-width: 1024px) and (min-width: 769px) {
+/* ── Large tablets / small laptops: 3 columns ────── */
+@media (min-width: 901px) and (max-width: 1200px) {
   .capabilities-grid,
   .arch-grid {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
-  /* Reset desktop nth-child rules — 2 per row on tablet */
-  .capability-card:nth-child(n),
-  .arch-item:nth-child(n) {
-    grid-column: span 3;
+  #capabilities .section-inner,
+  #architecture .section-inner {
+    max-width: 900px;
   }
 }
 
