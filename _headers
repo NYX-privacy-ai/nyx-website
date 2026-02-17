@@ -1,0 +1,16 @@
+# Cloudflare Pages custom headers
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+# HTML — always revalidate (Cloudflare Pages default, but explicit is better)
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# CSS and JS — short cache, always revalidate with server
+/*.css
+  Cache-Control: public, max-age=60, must-revalidate
+/*.js
+  Cache-Control: public, max-age=60, must-revalidate
+
+# Images — cache longer (they rarely change)
+/assets/images/*
+  Cache-Control: public, max-age=86400, must-revalidate
