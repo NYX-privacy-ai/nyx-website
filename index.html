@@ -28,7 +28,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/nyx-logo.png">
 
-  <link rel="stylesheet" href="style.css?v=1.3.2">
+  <link rel="stylesheet" href="style.css?v=1.5.0">
 </head>
 <body>
 
@@ -277,103 +277,6 @@
     </div>
   </footer>
 
-  <!-- ═══════════════════════════════════════════════════
-       INSTALL GUIDE MODAL
-  ════════════════════════════════════════════════════ -->
-  <div id="install-modal" class="modal-overlay" style="display:none;">
-    <div class="modal-card">
-      <button class="modal-close" onclick="closeInstallModal()" aria-label="Close">&times;</button>
-
-      <h2 class="modal-title">Before you install</h2>
-      <p class="modal-subtitle">
-        Nyx is not yet notarised with Apple — our developer certificate is on its way.
-        Until then, macOS will show a security warning. Here's how to allow it:
-      </p>
-
-      <!-- Step 1 -->
-      <div class="install-step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h3>Open the .dmg and drag Nyx to Applications</h3>
-          <p>Double-click the downloaded <code>.dmg</code> file and drag Nyx into your Applications folder as usual.</p>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="install-step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h3>macOS will block the first launch</h3>
-          <p>When you open Nyx for the first time, you'll see this dialog:</p>
-          <!-- CSS mockup of macOS Gatekeeper dialog -->
-          <div class="macos-dialog">
-            <div class="macos-dialog-icon">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FF3B30" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="15" y1="9" x2="9" y2="15"/>
-                <line x1="9" y1="9" x2="15" y2="15"/>
-              </svg>
-            </div>
-            <div class="macos-dialog-text">
-              <strong>"Nyx" can't be opened because Apple cannot check it for malicious software.</strong>
-              <span>This software needs to be updated. Contact the developer for more information.</span>
-            </div>
-            <div class="macos-dialog-buttons">
-              <div class="macos-btn-secondary">Show in Finder</div>
-              <div class="macos-btn-primary">OK</div>
-            </div>
-          </div>
-          <p class="step-note">Click <strong>OK</strong> — then follow Step 3.</p>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="install-step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h3>Allow Nyx in System Settings</h3>
-          <p>Open <strong>System Settings → Privacy & Security</strong>, scroll down, and you'll see:</p>
-          <!-- CSS mockup of macOS Privacy & Security panel -->
-          <div class="macos-settings-panel">
-            <div class="macos-settings-header">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8899AA" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>Privacy & Security</span>
-            </div>
-            <div class="macos-settings-row">
-              <div class="macos-settings-message">
-                <span class="macos-settings-blocked">"Nyx" was blocked from use because it is not from an identified developer.</span>
-              </div>
-              <div class="macos-btn-open-anyway">Open Anyway</div>
-            </div>
-          </div>
-          <p class="step-note">Click <strong>Open Anyway</strong>, confirm with your password, and Nyx will launch.</p>
-        </div>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="install-step">
-        <div class="step-number">✓</div>
-        <div class="step-content">
-          <h3>You only need to do this once</h3>
-          <p>After the first launch, macOS remembers your choice and Nyx will open normally every time.</p>
-        </div>
-      </div>
-
-      <!-- Developer certificate notice -->
-      <div class="cert-notice">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
-        </svg>
-        <span>We are waiting for our Apple Developer certificate. Once received, this step will no longer be necessary.</span>
-      </div>
-
-      <!-- Download button -->
-      <button class="btn btn-primary modal-download-btn" onclick="proceedDownload()">
-        Continue to Download
-      </button>
-    </div>
-  </div>
-
-  <script src="main.js?v=1.3.2"></script>
+  <script src="main.js?v=1.5.0"></script>
 </body>
 </html>

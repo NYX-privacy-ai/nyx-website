@@ -164,37 +164,10 @@
 
 })();
 
-// ── Install guide modal + download (outside IIFE so onclick can call them) ──
+// ── Download (outside IIFE so onclick can call it) ──
 
 function downloadNyx(e) {
   e.preventDefault();
-  // Show the install guide modal instead of downloading directly
-  var modal = document.getElementById('install-modal');
-  if (modal) {
-    modal.style.display = 'flex';
-    // Trigger animation on next frame
-    requestAnimationFrame(function () {
-      modal.classList.add('active');
-    });
-    // Prevent body scroll
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-function closeInstallModal() {
-  var modal = document.getElementById('install-modal');
-  if (modal) {
-    modal.classList.remove('active');
-    setTimeout(function () {
-      modal.style.display = 'none';
-    }, 300);
-    document.body.style.overflow = '';
-  }
-}
-
-function proceedDownload() {
-  // Close the modal
-  closeInstallModal();
 
   // Detect architecture: Apple Silicon (arm64) vs Intel (x86_64)
   var isArm = false;
@@ -239,17 +212,3 @@ function proceedDownload() {
       window.open('https://github.com/NYX-privacy-ai/nyx/releases/latest', '_blank');
     });
 }
-
-// Close modal on overlay click (not the card itself)
-document.addEventListener('click', function (e) {
-  if (e.target && e.target.id === 'install-modal') {
-    closeInstallModal();
-  }
-});
-
-// Close modal on Escape key
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'Escape') {
-    closeInstallModal();
-  }
-});
