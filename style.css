@@ -652,14 +652,9 @@ footer {
 
 /* ── Mobile: single column ────────────────────────── */
 @media (max-width: 600px) {
-  /* Disable video on mobile — save bandwidth + GPU, use static image */
+  /* Video plays on mobile too (autoplay+muted+playsinline supported on iOS/Android) */
   .hero-video {
-    display: none;
-  }
-
-  #hero {
-    background: url('assets/images/hero-bg.png') center center / cover no-repeat;
-    background-color: var(--obsidian);
+    object-position: center 40%;
   }
 
   .capabilities-grid,
