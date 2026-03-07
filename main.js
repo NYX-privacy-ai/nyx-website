@@ -169,46 +169,10 @@
 function downloadNyx(e) {
   e.preventDefault();
 
-  // Detect architecture: Apple Silicon (arm64) vs Intel (x86_64)
-  var isArm = false;
-  try {
-    if (navigator.userAgentData && navigator.userAgentData.architecture) {
-      isArm = navigator.userAgentData.architecture === 'arm';
-    } else if (navigator.platform === 'MacIntel') {
-      var canvas = document.createElement('canvas');
-      var gl = canvas.getContext('webgl');
-      if (gl) {
-        var debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-        if (debugInfo) {
-          var renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-          isArm = /apple\s*(m\d|gpu)/i.test(renderer);
-        }
-      }
-    }
-  } catch (err) {
-    isArm = true;
-  }
-
-  var arch = isArm ? 'aarch64' : 'x64';
-
-  fetch('https://api.github.com/repos/NYX-privacy-ai/nyx/releases/latest')
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      var dmg = null;
-      var assets = data.assets || [];
-      for (var i = 0; i < assets.length; i++) {
-        if (assets[i].name.indexOf(arch) !== -1 && assets[i].name.endsWith('.dmg')) {
-          dmg = assets[i].browser_download_url;
-          break;
-        }
-      }
-      if (dmg) {
-        window.location.href = dmg;
-      } else {
-        window.open('https://github.com/NYX-privacy-ai/nyx/releases/latest', '_blank');
-      }
-    })
-    .catch(function () {
-      window.open('https://github.com/NYX-privacy-ai/nyx/releases/latest', '_blank');
-    });
+  // GitHub releases/latest/download redirects to the newest tag automatically.
+  // Using this URL avoids hitting the GitHub API (which has a 60 req/hour
+  // unauthenticated limit) and starts the download immediately.
+  // We only ship Apple Silicon (aarch64) for now — add x64 DMG URL here
+  // when an Intel build is available.
+  window.location.href = 'https://github.com/NYX-privacy-ai/nyx/releases/latest/download/Nyx_aarch64.dmg';
 }
